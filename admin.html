@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mixworld Media Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+}
+.container {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 25px;
+  background: #181818;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,.6);
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+}
+input {
+  background: #222;
+  color: #fff;
+}
+button {
+  background: #e50914;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  opacity: .9;
+}
+.link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #1da1f2;
+}
+.hidden {
+  display: none;
+}
+.dashboard {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.card {
+  background: #181818;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.nav button {
+  width: auto;
+  padding: 8px 14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="container" id="loginBox">
+  <h2>Mixworld Media Admin</h2>
+  <input type="email" id="email" placeholder="Admin Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <div class="link" onclick="showReset()">Forgot password?</div>
+</div>
+
+<!-- RESET PASSWORD -->
+<div class="container hidden" id="resetBox">
+  <h2>Reset Password</h2>
+  <input type="email" id="resetEmail" placeholder="Enter your email">
+  <button onclick="resetPassword()">Send Reset Email</button>
+  <div class="link" onclick="backToLogin()">Back to login</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard hidden" id="dashboard">
+  <div class="nav">
+    <h2>Admin Dashboard</h2>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="card">
+    <h3>Website Control</h3>
+    <p>• Manage talents<br>• Approve or remove demos<br>• Feature talents<br>• Control ads</p>
+  </div>
+
+  <div class="card">
+    <h3>Updates</h3>
+    <p>You will post updates here that appear on the website.</p>
+  </div>
+
+  <div class="card">
+    <h3>Bookings</h3>
+    <p>View all booking requests (Admin + Talent).</p>
+  </div>
+
+  <div class="card">
+    <h3>Security</h3>
+    <button onclick="changePassword()">Change Password</button>
+  </div>
+
+  <div class="card">
+    <h3>Growth (Coming Next)</h3>
+    <p>Charts for users, views, uploads.</p>
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, updatePassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAtIVUg84A9ViaCdqsICz7Sg45gtfNMwSY",
+  authDomain: "mixworld-media.firebaseapp.com",
+  projectId: "mixworld-media",
+  storageBucket: "mixworld-media.firebasestorage.app",
+  messagingSenderId: "840081421560",
+  appId: "1:840081421560:web:da1a8f51b778b04c31b70d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// LOGIN
+window.login = function () {
+  signInWithEmailAndPassword(
+    auth,
+    document.getElementById("email").value,
+    document.getElementById("password").value
+  ).catch(err => alert(err.message));
+};
+
+// RESET
+window.resetPassword = function () {
+  sendPasswordResetEmail(auth, document.getElementById("resetEmail").value)
+    .then(() => alert("Reset email sent"))
+    .catch(err => alert(err.message));
+};
+
+// LOGOUT
+window.logout = function () {
+  signOut(auth);
+};
+
+// CHANGE PASSWORD
+window.changePassword = function () {
+  const newPass = prompt("Enter new password:");
+  if (!newPass) return;
+  updatePassword(auth.currentUser, newPass)
+    .then(() => alert("Password updated"))
+    .catch(err => alert(err.message));
+};
+
+// AUTH STATE
+onAuthStateChanged(auth, user => {
+  if (user) {
+    loginBox.classList.add("hidden");
+    resetBox.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+  } else {
+    dashboard.classList.add("hidden");
+    loginBox.classList.remove("hidden");
+  }
+});
+
+// UI HELPERS
+window.showReset = () => {
+  loginBox.classList.add("hidden");
+  resetBox.classList.remove("hidden");
+};
+window.backToLogin = () => {
+  resetBox.classList.add("hidden");
+  loginBox.classList.remove("hidden");
+};
+</script>
+
+</body>
+</html>
