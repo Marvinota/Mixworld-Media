@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mixworld Media | Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAtIVUg84A9ViaCdqsICz7Sg45gtfNMwSY",
+  authDomain: "mixworld-media.firebaseapp.com",
+  projectId: "mixworld-media",
+  storageBucket: "mixworld-media.firebasestorage.app",
+  messagingSenderId: "840081421560",
+  appId: "1:840081421560:web:da1a8f51b778b04c31b70d"
+};
+
+initializeApp(firebaseConfig);
+getFirestore();
+</script>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f0f0f;
+  color:#fff;
+}
+header{
+  background:#e50914;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+}
+nav{
+  display:flex;
+  overflow-x:auto;
+  background:#1c1c1c;
+}
+nav button{
+  flex:1;
+  padding:12px;
+  background:none;
+  border:none;
+  color:#fff;
+}
+main{padding:20px;}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+}
+.card{
+  background:#1c1c1c;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+}
+.card h3{color:#e50914;font-size:26px;margin:5px 0;}
+.actions button{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+}
+.logout{background:#444;color:#fff;}
+.burn{background:#ff4d4d;color:#fff;}
+.unburn{background:#1db954;color:#fff;}
+footer{
+  text-align:center;
+  padding:15px;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+if(sessionStorage.getItem("mw_admin")!=="true"){
+  window.location.href="admin.html";
+}
+</script>
+
+<header>Mixworld Media – Admin Panel</header>
+
+<nav>
+  <button>Overview</button>
+  <button>Talents</button>
+  <button>Bookings</button>
+  <button>Ads</button>
+  <button>Updates</button>
+  <button>Settings</button>
+</nav>
+
+<main>
+  <h2>Website Growth</h2>
+
+  <div class="cards">
+    <div class="card">
+      <p>Total Visitors</p>
+      <h3 id="visitors">0</h3>
+    </div>
+    <div class="card">
+      <p>Total Content Views</p>
+      <h3 id="views">0</h3>
+    </div>
+    <div class="card">
+      <p>Approved Talents</p>
+      <h3 id="talents">0</h3>
+    </div>
+    <div class="card">
+      <p>Bookings</p>
+      <h3 id="bookings">0</h3>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="burn">Burn Website (Maintenance)</button>
+    <button class="unburn">Unburn Website (Live)</button>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</main>
+
+<footer>
+  Admin email: mixworldmediaug@gmail.com
+</footer>
+
+<script>
+function logout(){
+  sessionStorage.removeItem("mw_admin");
+  window.location.href="admin.html";
+}
+</script>
+
+</body>
+</html>

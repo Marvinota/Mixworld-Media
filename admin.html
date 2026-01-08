@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mixworld Media | Admin Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  background:#0f0f0f;
+  font-family:Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:#fff;
+}
+.box{
+  background:#1c1c1c;
+  padding:30px;
+  border-radius:12px;
+  width:100%;
+  max-width:360px;
+}
+h2{text-align:center;margin-bottom:20px;}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+}
+button{
+  background:#e50914;
+  color:#fff;
+  font-size:16px;
+}
+.error{
+  color:#ff4d4d;
+  text-align:center;
+  display:none;
+}
+small{
+  display:block;
+  margin-top:15px;
+  text-align:center;
+  color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Admin Login</h2>
+  <input type="password" id="pass" placeholder="Enter admin password">
+  <button onclick="login()">Login</button>
+  <p class="error" id="err">Wrong password</p>
+  <small>Mixworld Media ©</small>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "NampozaJ";
+
+function login(){
+  if(document.getElementById("pass").value === ADMIN_PASSWORD){
+    sessionStorage.setItem("mw_admin","true");
+    window.location.href="admin-dashboard.html";
+  }else{
+    document.getElementById("err").style.display="block";
+  }
+}
+</script>
+
+</body>
+</html>
