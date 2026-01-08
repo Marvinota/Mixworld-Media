@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mixworld Media Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .login-box {
+      background: #111;
+      padding: 30px;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff1f2a;
+    }
+    .error {
+      color: #ff8080;
+      text-align: center;
+      display: none;
+      margin-top: 10px;
+    }
+    .note {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 15px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Mixworld Media Admin</h2>
+    <input type="password" id="password" placeholder="Enter admin password">
+    <button onclick="login()">Login</button>
+    <div class="error" id="error">Wrong password</div>
+    <div class="note">
+      Authorized access only
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const correctPassword = "NampozaJ";
+      const input = document.getElementById("password").value;
+
+      if (input === correctPassword) {
+        sessionStorage.setItem("mixworldAdmin", "true");
+        window.location.href = "admin_dashboard.html";
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>

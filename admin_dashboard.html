@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mixworld Media Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #111;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .sidebar h2 {
+      color: #e50914;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin-bottom: 10px;
+      color: #ddd;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .sidebar a:hover {
+      background: #e50914;
+      color: #fff;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: #161616;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .card p {
+      font-size: 26px;
+      margin: 10px 0 0;
+      color: #e50914;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    button.action {
+      background: #e50914;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    button.action.secondary {
+      background: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+  if (sessionStorage.getItem("mixworldAdmin") !== "true") {
+    window.location.href = "admin.html";
+  }
+</script>
+
+<div class="sidebar">
+  <h2>Mixworld Admin</h2>
+  <a href="#">Dashboard</a>
+  <a href="#">Talents</a>
+  <a href="#">Content</a>
+  <a href="#">Bookings</a>
+  <a href="#">Ads Manager</a>
+  <a href="#">Updates</a>
+  <a href="#">Feedback</a>
+  <a href="#">Settings</a>
+  <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<div class="main">
+
+  <h1>Dashboard Overview</h1>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Total Visitors</h3>
+      <p>0</p>
+    </div>
+    <div class="card">
+      <h3>Total Talents</h3>
+      <p>0</p>
+    </div>
+    <div class="card">
+      <h3>Total Uploads</h3>
+      <p>0</p>
+    </div>
+    <div class="card">
+      <h3>Total Bookings</h3>
+      <p>0</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Quick Actions</h2>
+    <button class="action">Approve Talents</button>
+    <button class="action">Feature Content</button>
+    <button class="action">Add Ad</button>
+    <button class="action secondary">Remove Demo Content</button>
+  </div>
+
+</div>
+
+<script>
+  function logout() {
+    sessionStorage.removeItem("mixworldAdmin");
+    window.location.href = "admin.html";
+  }
+</script>
+
+</body>
+</html>
