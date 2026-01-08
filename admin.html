@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mixworld Media Admin Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:#0c0c0c;
+  font-family:Arial, sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.box{
+  background:#111;
+  padding:30px;
+  width:90%;
+  max-width:320px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,0.7);
+}
+h2{color:white;margin-bottom:20px;}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:none;
+  margin-bottom:15px;
+}
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  background:red;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Mixworld Media Admin</h2>
+
+  <input 
+    type="password"
+    id="password"
+    placeholder="Enter admin password"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    onpaste="return false"
+  >
+
+  <button onclick="login()">LOGIN</button>
+</div>
+
+<script>
+window.onload = () => {
+  document.getElementById("password").value = "";
+};
+
+function login(){
+  const pass = document.getElementById("password").value;
+
+  if(pass === "NampozaJ"){
+    localStorage.setItem("mixworldAdmin","true");
+    window.location.href = "admin_dashboard.html";
+  }else{
+    alert("Wrong password");
+  }
+}
+</script>
+
+</body>
+</html>
